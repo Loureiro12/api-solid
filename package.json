@@ -20,7 +20,9 @@
   },
   "homepage": "https://github.com/Loureiro12/api-solid#readme",
   "devDependencies": {
+    "@rocketseat/eslint-config": "1.2.0",
     "@types/node": "20.2.3",
+    "eslint": "8.41.0",
     "tsup": "6.7.0",
     "tsx": "3.12.7",
     "txs": "1.0.0",
