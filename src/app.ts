@@ -11,3 +11,5 @@ prisma.user.create({
     email: 'contato.loureiro1@gmail.com',
   },
 })
+
+// docker run --name api-solid-pg POSTGRESQL_USERNAME=docker -e POSTGRESQL_PASSWORD=docker -e POSTGRESQL_DATABASE=apisolid -p 5432:5432 bitnami/postgresql
