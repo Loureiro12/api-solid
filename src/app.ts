@@ -1,15 +1,25 @@
 import fastify from 'fastify'
-import { PrismaClient } from '@prisma/client'
+import { z } from 'zod'
+import { prisma } from './lib/prisma'
 
 export const app = fastify()
 
-const prisma = new PrismaClient()
+app.post('/user', async (request, reply) => {
+  const registerBodySchema = z.object({
+    name: z.string(),
+    email: z.string().email(),
+    password: z.string().min(6),
+  })
 
-prisma.user.create({
-  data: {
-    name: 'André Loureiro',
-    email: 'contato.loureiro1@gmail.com',
-  },
+  const { name, email, password } = registerBodySchema.parse(request.body)
+
+  await prisma.user.create({
+    data: {
+      name,
+      email,
+      password_hash: password,
+    },
+  })
+
+  return reply.status(201).send()
 })
-
-// docker run --name api-solid-pg POSTGRESQL_USERNAME=docker -e POSTGRESQL_PASSWORD=docker -e POSTGRESQL_DATABASE=apisolid -p 5432:5432 bitnami/postgresql
